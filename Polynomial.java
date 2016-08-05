@@ -132,4 +132,36 @@ public class Polynomial {
 		return this.map;
 	}
 	
+	public static void toHTML(String s) throws IOException
+	{
+       BufferedWriter bw=null;
+        
+        try 
+        {
+            bw = new BufferedWriter( new FileWriter("C:\\Desktop\\Polynomial.html"));
+            String line="<html><title>Polynomial</title><body>";
+            String[] datainfo = s.split("^");
+            String line1="";
+            for(int i=0;datainfo[i]!=null;i++)
+            {
+            	line1+=datainfo[i]+"<sup>"+datainfo[i+1]+"</sup>";
+            }
+            String line2="</body></html>";
+            bw.write(line+line2);
+            bw.newLine();
+
+        }
+        catch(IOException e)
+        {
+        	
+        }
+        finally
+        {
+        	if(bw!=null)
+                bw.close();
+
+        }
+        
+		
+	}
 }
