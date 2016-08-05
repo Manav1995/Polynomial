@@ -1,36 +1,62 @@
-import java.util.Arrays;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.TreeMap;
 
-class Polynomial {
-	
-	/*Coefficients, degree and Variable name are the properties of polynomial*/
-	//private List<Double> coefficients;
-	//private List<Integer> exponents;
-	private Map<Integer,Double> map ;
-	private String varName;
-	
-	/*Pass the coefficients and degree to construtor to create the function*/
-	public Polynomial(Map<Integer,Double> m) {
-		map = m;
-		this.varName = "x";
+public class Polynomial {
+	private Map<Integer, Double> polyMap;
+
+	public Polynomial() {
+		polyMap = new TreeMap<Integer, Double>();
+	}
+
+	public Polynomial(Map<Integer, Double> polyMap) {
+		this.polyMap = polyMap;
+	}
+
+	public Map<Integer, Double> createPolyMap(String exps, String coeffs) {
+		Map<Integer, Double> polyMap = new TreeMap<Integer, Double>();
+		String exp[] = exps.split(" ");
+		String coeff[] = coeffs.split(" ");
+		for (int i = 0; i < exps.length(); i++) {
+			polyMap.put(Integer.parseInt(exp[i]), Double.parseDouble(coeff[i]));
+		}
+		return polyMap;
+	}
+
+	private Polynomial createPolynomial(String fileName) throws IOException {
+		File file = new File(fileName);
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		String exp = br.readLine();
+		String coeff = br.readLine();
+		br.close();
+		return new Polynomial(createPolyMap(exp, coeff));	
+	}
+
+	public static void main(String args[]) throws IOException {
+		Polynomial A = (new Polynomial()).createPolynomial(args[0]);
+		Polynomial B = (new Polynomial()).createPolynomial(args[1]);
+		
+		Polynomial C = A.add(B);
+		Polynomial D = A.subtract(B);
+		Polynomial E = A.multiply(B);
+		
+		C.toString();
+		D.toString();
+		E.toString();
+		
+		C.toHTML();
+		D.toHTML();
+		E.toHTML();
+		
+		C.toLatex();
+		D.toLatex();
+		E.toLatex();
 	}
 	
-	/*All the get Functions*/
-	public Map<Integer,Double> getMap(){
-		return this.map;
-	}
-	
-	public String getVariableName(){
-		return this.varName;
-	}
-	public int getDegree() {
-		return map.size();
-	}
-	
-	
+
 	/*Manipulation Functions*/
 	public Polynomial add(Polynomial p) {
 			int outDegree = Math.max(p.getDegree(), this.getDegree());
@@ -89,6 +115,7 @@ class Polynomial {
 		}
 		return s;
 	}
+	
 	public String getCoefficientString(int num){
 		String s="";
 			return s+=num;
@@ -100,8 +127,9 @@ class Polynomial {
 	public String toHTML(){
 		return null;
 	}
-	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
 	
+	public Map<Integer,Double> getMap(){
+		return this.map;
 	}
+	
 }
