@@ -147,7 +147,7 @@ public class Polynomial {
             	line1+=datainfo[i]+"<sup>"+datainfo[i+1]+"</sup>";
             }
             String line2="</body></html>";
-            bw.write(line+line2);
+            bw.write(line+line1+line2);
             bw.newLine();
 
         }
