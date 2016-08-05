@@ -15,7 +15,8 @@ public class Polynomial {
 	public Polynomial(Map<Integer, Double> polyMap) {
 		this.polyMap = polyMap;
 	}
-
+	
+	
 	public Map<Integer, Double> createPolyMap(String exps, String coeffs) {
 		Map<Integer, Double> polyMap = new TreeMap<Integer, Double>();
 		String exp[] = exps.split(" ");
