@@ -145,6 +145,7 @@ public class Polynomial {
             for(int i=0;datainfo[i]!=null;i++)
             {
             	line1+=datainfo[i]+"<sup>"+datainfo[i+1]+"</sup>";
+				i++;
             }
             String line2="</body></html>";
             bw.write(line+line1+line2);
