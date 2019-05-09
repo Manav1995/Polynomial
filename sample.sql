@@ -1,1 +1,1 @@
-SELECT top 10 * FROM ods_production.subscription;
+insert into public.dummy (xxxx) values ('hello');
